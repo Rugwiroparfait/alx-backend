@@ -2,21 +2,7 @@ import csv
 import math
 from typing import List, Tuple
 
-
-def index_range(page: int, page_size: int) -> tuple:
-    """
-    Calculate start and end index for pagination.
-
-    Args:
-        page (int): Current page number (1-indexed).
-        page_size (int): Number of items per page.
-
-    Returns:
-        tuple: A tuple containing the start and end index.
-    """
-    start_index = (page - 1) * page_size
-    end_index = page * page_size
-    return (start_index, end_index)
+index_range = __import__("0-simple_helper_function").index_range
 
 
 class Server:

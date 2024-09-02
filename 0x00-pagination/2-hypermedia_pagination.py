@@ -3,12 +3,7 @@ import math
 from typing import List, Tuple, Dict, Any
 
 
-def index_range(page: int, page_size: int) -> Tuple[int, int]:
-    """Calculate start and end index for pagination."""
-    start_index = (page - 1) * page_size
-    end_index = page * page_size
-    return start_index, end_index
-
+index_range = __import__("0-simple_helper_function").index_range
 
 class Server:
     """Server class to paginate a database of popular baby names."""
