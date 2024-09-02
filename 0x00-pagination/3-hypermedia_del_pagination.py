@@ -5,7 +5,7 @@ Deletion-resilient hypermedia pagination
 
 import csv
 import math
-from typing import List, Dict, Any
+from typing import List, Dict, Any, Optional
 
 
 class Server:
@@ -35,12 +35,17 @@ class Server:
             }
         return self.__indexed_dataset
 
-    def get_hyper_index(self, index: int = None, page_size: int = 10) -> Dict[str, Any]:
-        """Return a dictionary containing hypermedia pagination data, resilient to deletions."""
+    def get_hyper_index(
+        self, index: int = None, page_size: int = 10
+    ) -> Dict[str, Any]:
+        """Return a dictionary containing hypermedia pagination
+        data, resilient to deletions."""
         indexed_data = self.indexed_dataset()
 
         # Assert that the index is within the valid range
-        assert isinstance(index, int) and index >= 0 and index < len(indexed_data), "index out of range"
+        assert isinstance(index, int), "index must be an integer"
+        assert index >= 0, "index must be non-negative"
+        assert index < len(indexed_data), "index out of range"
 
         data = []
         next_index = index
