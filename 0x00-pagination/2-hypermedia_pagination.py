@@ -1,7 +1,7 @@
 import csv
 import math
 from typing import List, Tuple, Dict, Any
-
+"""Module for paginating a dataset of popular baby names. """
 
 index_range = __import__("0-simple_helper_function").index_range
 
