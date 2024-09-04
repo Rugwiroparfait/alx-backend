@@ -22,7 +22,7 @@ class LRUCache(BaseCaching):
         """
         Add an item in the cache. If the cache exceeds its limit,
         discard the least recently used item.
-        
+
         Args:
             key (str): The key for the cache.
             item (str): The value for the cache.
@@ -33,7 +33,7 @@ class LRUCache(BaseCaching):
         if key in self.cache_data:
             self.lru_order.remove(key)
         elif len(self.cache_data) >= BaseCaching.MAX_ITEMS:
-            lru_key = self.lru_order.pop(0)  # Remove the first item in the order list
+            lru_key = self.lru_order.pop(0)
             del self.cache_data[lru_key]
             print(f"DISCARD: {lru_key}")
 
@@ -47,9 +47,10 @@ class LRUCache(BaseCaching):
 
         Args:
             key (str): The key to retrieve the value.
-        
+
         Returns:
-            str: The value associated with the key or None if the key doesn't exist.
+            str: The value associated with the key
+            or None if the key doesn't exist.
         """
         if key is None or key not in self.cache_data:
             return None

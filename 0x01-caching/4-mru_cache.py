@@ -33,7 +33,7 @@ class MRUCache(BaseCaching):
         if key in self.cache_data:
             self.mru_order.remove(key)
         elif len(self.cache_data) >= BaseCaching.MAX_ITEMS:
-            mru_key = self.mru_order.pop()  # Remove the last item in the order list
+            mru_key = self.mru_order.pop()
             del self.cache_data[mru_key]
             print(f"DISCARD: {mru_key}")
 
@@ -47,9 +47,9 @@ class MRUCache(BaseCaching):
 
         Args:
             key (str): The key to retrieve the value.
-        
         Returns:
-            str: The value associated with the key or None if the key doesn't exist.
+        str: The value associated with
+        the key or None if the key doesn't exist.
         """
         if key is None or key not in self.cache_data:
             return None
