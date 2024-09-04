@@ -1,28 +1,28 @@
 #!/usr/bin/env python3
 """
-LRUCache module
+MRUCache module
 """
 
 from base_caching import BaseCaching
 
 
-class LRUCache(BaseCaching):
+class MRUCache(BaseCaching):
     """
-    LRUCache class implements a Least Recently Used (LRU) caching system.
-    It inherits from BaseCaching and follows the LRU algorithm to discard
-    the least recently used item when the cache exceeds its size limit.
+    MRUCache class implements a Most Recently Used (MRU) caching system.
+    It inherits from BaseCaching and follows the MRU algorithm to discard
+    the most recently used item when the cache exceeds its size limit.
     """
 
     def __init__(self):
-        """Initialize the LRUCache class."""
+        """Initialize the MRUCache class."""
         super().__init__()
-        self.lru_order = []  # List to maintain the order of usage for LRU
+        self.mru_order = []  # List to maintain the order of usage for MRU
 
     def put(self, key, item):
         """
         Add an item in the cache. If the cache exceeds its limit,
-        discard the least recently used item.
-        
+        discard the most recently used item.
+
         Args:
             key (str): The key for the cache.
             item (str): The value for the cache.
@@ -31,14 +31,14 @@ class LRUCache(BaseCaching):
             return
 
         if key in self.cache_data:
-            self.lru_order.remove(key)
+            self.mru_order.remove(key)
         elif len(self.cache_data) >= BaseCaching.MAX_ITEMS:
-            lru_key = self.lru_order.pop(0)  # Remove the first item in the order list
-            del self.cache_data[lru_key]
-            print(f"DISCARD: {lru_key}")
+            mru_key = self.mru_order.pop()  # Remove the last item in the order list
+            del self.cache_data[mru_key]
+            print(f"DISCARD: {mru_key}")
 
         self.cache_data[key] = item
-        self.lru_order.append(key)
+        self.mru_order.append(key)
 
     def get(self, key):
         """
@@ -54,7 +54,7 @@ class LRUCache(BaseCaching):
         if key is None or key not in self.cache_data:
             return None
 
-        self.lru_order.remove(key)
-        self.lru_order.append(key)
+        self.mru_order.remove(key)
+        self.mru_order.append(key)
 
         return self.cache_data[key]
