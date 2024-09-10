@@ -113,3 +113,5 @@ __pycache__/
 .DS_Store
 *.pyo
 *.pyd
+
+trashy
