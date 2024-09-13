@@ -33,6 +33,7 @@ def get_locale():
 # Adding get_locale to the Jinja2 context
 @app.context_processor
 def inject_locale():
+    """ get locale definition"""
     return dict(get_locale=get_locale)
 
 
