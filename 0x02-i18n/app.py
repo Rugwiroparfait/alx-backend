@@ -4,13 +4,14 @@ Flask web application with Flask-Babel for internationalization (i18n).
 This application supports timezone selection via URL parameter and
 determines the preferred timezone from the user's request or the URL.
 
-It renders HTML content in the selected timezone.
+It renders HTML content in the selected timezone and displays the current time.
 """
 
 from flask import Flask, render_template, request, g
 from flask_babel import Babel, _
 import pytz
 from pytz import UnknownTimeZoneError
+from datetime import datetime
 
 app = Flask(__name__)
 
@@ -72,8 +73,8 @@ def get_locale():
     locale based on the `Accept-Language` header from the request.
 
     Returns:
-        str: The locale that matches the user's request or
-        the best match locale.
+        str: The locale that matches the user's request
+        or the best match locale.
     """
     locale = request.args.get('locale')
     if locale in app.config['LANGUAGES']:
@@ -94,8 +95,8 @@ def get_timezone():
     Otherwise, it returns the timezone from user settings or defaults to UTC.
 
     Returns:
-        str: The timezone that matches the user's request or
-        the default timezone.
+        str: The timezone that matches the user's request
+        or the default timezone.
     """
     timezone = request.args.get('timezone')
     if timezone:
@@ -133,7 +134,7 @@ def index():
     """
     Render the index page.
 
-    This route renders the `7-index.html` template,
+    This route renders the `index.html` template,
     which uses the `get_locale` and `get_timezone` functions
     to display content in the appropriate language and timezone
     based on the user's preference.
@@ -141,7 +142,9 @@ def index():
     Returns:
         str: The rendered HTML content for the index page.
     """
-    return render_template('7-index.html')
+    current_time = datetime.now(pytz.timezone(get_timezone()))
+    formatted_time = current_time.strftime('%b %d, %Y, %I:%M:%S %p')
+    return render_template('index.html', current_time=formatted_time)
 
 
 if __name__ == '__main__':
