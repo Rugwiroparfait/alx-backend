@@ -30,6 +30,12 @@ def get_locale():
     return request.accept_languages.best_match(app.config['LANGUAGES'])
 
 
+# Adding get_locale to the Jinja2 context
+@app.context_processor
+def inject_locale():
+    return dict(get_locale=get_locale)
+
+
 @app.route('/')
 def index():
     """Render the index template."""
