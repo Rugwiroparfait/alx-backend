@@ -10,6 +10,7 @@ from flask_babel import Babel, _
 
 app = Flask(__name__)
 
+
 class Config:
     """Configuration class for supported languages and time zones."""
     LANGUAGES = ["en", "fr"]
