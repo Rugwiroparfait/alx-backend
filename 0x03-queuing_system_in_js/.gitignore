@@ -1,0 +1,20 @@
+# Node modules
+node_modules/
+
+# Redis dump file
+# dump.rdb
+
+# Logs
+logs/
+*.log
+
+# Babel cache
+.babel_cache/
+
+# Nodemon process logs
+nodemon-debug.log
+
+# Miscellaneous
+.DS_Store
+.env
+
